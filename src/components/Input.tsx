@@ -4,6 +4,7 @@ type InputProp = {
   id: string
   testid: string
   type: string
+  name: string
   value: string
   placeholder: string
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
@@ -13,6 +14,7 @@ function Input({
   id,
   type,
   testid,
+  name,
   value,
   placeholder = '',
   onChange
@@ -25,6 +27,7 @@ function Input({
       data-testid={testid}
       className={style}
       type={type}
+      name={name}
       value={value}
       placeholder={placeholder}
       onChange={onChange}

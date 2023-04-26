@@ -9,7 +9,7 @@ function Home() {
   const redirect = useNavigate()
 
   const onClickLogout = useCallback(() => {
-    localStorage.clear()
+    localStorage.removeItem('token')
     return redirect('/')
   }, [redirect])
 

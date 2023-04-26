@@ -18,7 +18,6 @@ export const getInterCeptor = () => {
     (config: InternalAxiosRequestConfig<any>) => {
       const token = localStorage.getItem('token')
       if (token) {
-        // const jsonToken = JSON.parse(token)
         // eslint-disable-next-line no-param-reassign
         config.headers.Authorization = `Bearer ${token}`
       }
