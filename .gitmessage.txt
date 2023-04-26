@@ -1,4 +1,3 @@
-# 제목:
 # [type]: [description]
 # 작업내용: 
 
