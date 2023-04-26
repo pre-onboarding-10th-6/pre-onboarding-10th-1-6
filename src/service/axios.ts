@@ -1,4 +1,5 @@
 import axios from 'axios'
+
 const defaultOptions = {
   baseURL: 'https://www.pre-onboarding-selection-task.shop/',
   headers: {
