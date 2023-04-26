@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import regex from '../util/regex'
+import { postSignUp } from '../service/auth'
 
 const SignUpContainer = styled.div`
   display: flex;
@@ -73,10 +74,18 @@ export default function SignUp() {
     setFormState({ ...formState, password: { value, isValid } })
   }
 
-  const onSubmit = (e: any) => {
+  const onSubmit = async (e: any) => {
     e.preventDefault()
-    console.log('true')
-    navigate(`/signin`)
+    const body = {
+      email: formState.email.value,
+      password: formState.password.value
+    }
+    try {
+      await postSignUp(body)
+      navigate(`/signin`)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (

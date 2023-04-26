@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import regex from '../util/regex'
+import { postSignIn } from '../service/auth'
 
 const SignUpContainer = styled.div`
   display: flex;
@@ -61,7 +62,7 @@ export default function SignIn() {
       setIsDisabled(true)
     }
   }, [formState])
-  console.log(formState)
+
   const onEmailChange = (e: any) => {
     const { value } = e.target
     const isValid = regex.email.test(value)
@@ -76,9 +77,18 @@ export default function SignIn() {
     })
   }
 
-  const onSubmit = (e: any) => {
+  const onSubmit = async (e: any) => {
     e.preventDefault()
-    navigate(`/todo`)
+    const body = {
+      email: formState.email.value,
+      password: formState.password.value
+    }
+    try {
+      await postSignIn(body)
+      navigate(`/todo`)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
