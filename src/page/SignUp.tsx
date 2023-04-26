@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import styled from 'styled-components'
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import regex from '../util/regex'
 
 const SignUpContainer = styled.div`
@@ -51,6 +52,7 @@ export default function SignUp() {
     }
   })
   const [isDisabled, setIsDisabled] = useState(true)
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (formState.email.isValid && formState.password.isValid) {
@@ -73,13 +75,14 @@ export default function SignUp() {
 
   const onSubmit = (e: any) => {
     e.preventDefault()
+    console.log('true')
+    navigate(`/signin`)
   }
 
   return (
     <SignUpContainer>
       <StTitle>회원가입</StTitle>
       <StInputForm onSubmit={onSubmit}>
-        {' '}
         <p>이메일</p>
         <StInput
           placeholder="아이디를 입력해 주세요."
@@ -98,7 +101,7 @@ export default function SignUp() {
           onChange={onPasswordChange}
         />
         <StMessage>비밀번호는 8자 이상 작성해 주세요.</StMessage>
-        <Button disabled={isDisabled} data-testid="signup-button" type="button">
+        <Button disabled={isDisabled} data-testid="signup-button" type="submit">
           회원가입
         </Button>
       </StInputForm>
