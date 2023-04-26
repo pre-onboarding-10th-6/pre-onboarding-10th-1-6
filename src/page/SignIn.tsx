@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import regex from '../util/regex'
 import { postSignIn } from '../service/auth'
+import { getAccessToken } from '../util/localStorage'
 
 const SignUpContainer = styled.div`
   display: flex;
@@ -54,6 +55,13 @@ export default function SignIn() {
   })
   const [isDisabled, setIsDisabled] = useState(true)
   const navigate = useNavigate()
+
+  useEffect(() => {
+    const isSignIn = getAccessToken()
+    if (isSignIn) {
+      navigate(`/todo`)
+    }
+  }, [navigate])
 
   useEffect(() => {
     if (formState.email.isValid && formState.password.isValid) {
