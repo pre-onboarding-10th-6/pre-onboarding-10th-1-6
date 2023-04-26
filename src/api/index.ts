@@ -1,19 +1,21 @@
-import axios from 'axios'
-
-const BASE_URL = 'https://www.pre-onboarding-selection-task.shop'
+import { authInstance } from '../utils/axios'
 
 export const SignInTodo = async (email: string, password: string) => {
-  const res = await axios.post(`${BASE_URL}/auth/signin`, {
+  // const res = await axios.post(`${BASE_URL}/auth/signin`, {
+  //   email,
+  //   password
+  // })
+  const res = await authInstance.post(`/auth/signin`, {
     email,
     password
   })
 
-  return res.data?.access_token
+  return res.data.access_token
 }
 
 export const SignUpTodo = async (email: string, password: string) => {
   try {
-    const res = await axios.post(`${BASE_URL}/auth/signup`, {
+    const res = await authInstance.post(`/auth/signup`, {
       email,
       password
     })

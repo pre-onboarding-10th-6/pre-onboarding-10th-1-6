@@ -4,33 +4,30 @@ import useInput from '../../hooks/useInput'
 import { SignInTodo } from '../../api'
 import Form from '../../components/Form'
 import Input from '../../components/Input'
+import validation from '../../utils/validation'
 
 function SignIn() {
   const [email, onChangeEmail] = useInput('')
   const [password, onChangePassWord] = useInput('')
   const redirect = useNavigate()
 
-  const onClickLogin = useCallback(async () => {
-    try {
-      const token = await SignInTodo(email, password)
-      localStorage.setItem('token', token)
-      redirect('/todo')
-    } catch (err) {
-      alert('로그인 실패')
-    }
-  }, [email, password, redirect])
+  const onClickLogin = useCallback(
+    async (...args: [string, string]) => {
+      try {
+        const token = await SignInTodo(args[0], args[1])
+        localStorage.setItem('token', token)
 
-  const regEx = useCallback(() => {
-    const emailRegEx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-    const pwdRegEx = /^.{8,}$/
-    if (emailRegEx.test(email) && pwdRegEx.test(password)) {
-      return true
-    }
-    return false
-  }, [email, password])
+        redirect('/todo')
+      } catch (err) {
+        alert('로그인 실패')
+      }
+    },
+    [redirect]
+  )
 
   useEffect(() => {
     const token = localStorage.getItem('token')
+
     if (token) {
       redirect('/todo')
     }
@@ -72,14 +69,14 @@ function SignIn() {
       </div>
       <button
         type="button"
-        disabled={!regEx()}
+        disabled={!validation(email, password)}
         data-testid="signin-button"
         className={
-          regEx()
+          validation(email, password)
             ? 'w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800'
             : 'w-full text-white bg-gray-600 font-medium rounded-lg text-sm px-5 py-2.5 text-center'
         }
-        onClick={onClickLogin}
+        onClick={() => onClickLogin(email, password)}
       >
         로그인
       </button>

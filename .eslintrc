@@ -16,6 +16,9 @@
     }
   },
   "rules": {
+    "react/button-has-type": "off",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "error",
     "jsx-a11y/label-has-associated-control": [
       2,
       {
