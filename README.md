@@ -53,10 +53,7 @@ function TodoLayout({ children }: TodoLayoutProps) {
 `updateTodo` : 선택한 todo의 id와 새로운 내용을 받아서 수정하고 수정된 todo로 현재 리스트에서 해당id와 같은 항목을 교체합니다.
 `deleteTodo` : 기존의 todo를 삭제하는 기능을 합니다. 삭제요청을 보내고 삭제요청한 ID와 일치하는 todo를 리스트에서 삭제합니다.
 
-위 훅을 사용해서 /todo 페이지가 렌더링 되었을 때 useEffect에서 fetchTodoList() 함수를 실행하도록 구현해서 데이터가 변경 되었을 때 todos가 최신상태로 유지되도록 했습니다.
-이런 방법으로 5 ~ 10 요구사항에 있는 수정, 삭제, 완료여부체크 요청을 했을 때 바로바로 todos가 최신상태로 되도록 하는 요구사항을 해결했습니다.
-
-다만 아쉬운 점은 최신화를 위해 TodoItem컴포넌트에서 요청마다 fetchTodoList 함수를 실행하는데 useTodo내부에선 수정, 삭제, 추가 할 때마다 todos가 업데이트 되지만 TodoItem에서 todos가 업데이트 되지않는 문제를 해결하기 위해 적용한 방식이라 애초에 contextAPI로 전역관리 했으면 되지않나 하는 생각이 들었습니다.
+아쉬운 점은 최신화를 위해 TodoItem컴포넌트에서 요청마다 fetchTodoList 함수를 실행하는데 useTodo내부에선 수정, 삭제, 추가 할 때마다 todos가 업데이트 되지만 TodoItem에서 todos가 업데이트 되지않는 문제를 해결하기 위해 적용한 방식이라 애초에 contextAPI로 전역관리 했으면 되지않나 하는 생각이 들었습니다.
 
 - [x] 목록에서는 TODO의 내용과 완료 여부가 표시되어야 합니다.
 - [x] TODO의 완료 여부는 `<input type="checkbox" />`를 통해 표현해주세요
