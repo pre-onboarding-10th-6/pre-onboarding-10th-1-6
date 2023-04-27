@@ -1,12 +1,12 @@
 import { authInstance } from '../utils/axios'
 
-export const SignInTodo = (email: string, password: string): Promise<any> =>
+export const SignInTodo = (email: string, password: string) =>
   authInstance.post(`/auth/signin`, {
     email,
     password
   })
 
-export const SignUpTodo = (email: string, password: string): Promise<any> =>
+export const SignUpTodo = (email: string, password: string) =>
   authInstance.post(`/auth/signup`, {
     email,
     password
