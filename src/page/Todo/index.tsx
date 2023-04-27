@@ -9,6 +9,7 @@ import { getInterCeptor } from '../../utils/axios'
 import TodoItem from '../../components/TodoItem'
 import { TODO_ITEM } from '../../constant/Todo'
 import { useNavigate } from 'react-router-dom'
+import { todoRegEx } from '../../utils/regex'
 
 function Todo() {
   const {
@@ -18,7 +19,7 @@ function Todo() {
   } = useInputs({ todo: '' })
   const [todoList, setTodoList] = useState([])
   const navigate = useNavigate()
-  // const [todoValid, setTodoValid] = useState(true)
+  const [todoValid, setTodoValid] = useState(true)
 
   //todo 불러오기
   const getTodo = () => {
@@ -32,6 +33,12 @@ function Todo() {
   //todo 추가
   const addTodo = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    // console.log('aaa', todoRegEx(todo))
+    if (todoRegEx(todo)) {
+      setTodoValid(true)
+    } else {
+      setTodoValid(false)
+    }
     AddTodo(todo)
       .then(res => {
         if (res.status === 201) {
@@ -93,7 +100,11 @@ function Todo() {
             value={todo}
             onChange={handleChange}
           />
-          <button data-testid="new-todo-add-button" type="submit">
+          <button
+            data-testid="new-todo-add-button"
+            type="submit"
+            disabled={todoRegEx(todo) && todoValid}
+          >
             <BsPlusCircleFill />
           </button>
         </Form>
