@@ -8,12 +8,8 @@ function useTodo() {
 
   useEffect(() => {
     async function fetchTodo() {
-      try {
-        const res = await getTodoAPI()
-        setTodos(res.data)
-      } catch (error) {
-        console.error(error)
-      }
+      const res = await getTodoAPI()
+      setTodos(res.data)
     }
     fetchTodo()
   }, [])
