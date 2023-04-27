@@ -13,18 +13,6 @@ export const instance: AxiosInstance = axios.create(defaultOptions)
 export const authInstance: AxiosInstance = axios.create(defaultOptions)
 export const todoInstance: AxiosInstance = axios.create(defaultOptions)
 
-export const getInterCeptor = () => {
-  authInstance.interceptors.request.use(
-    (config: InternalAxiosRequestConfig) => {
-      const token = localStorage.getItem('token')
-      if (token) {
-        config.headers.Authorization = `Bearer ${token}`
-      }
-      return config
-    }
-  )
-}
-
 todoInstance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   const token = localStorage.getItem('token')
   if (token) {
@@ -39,6 +27,7 @@ todoInstance.interceptors.response.use(
   },
   function (error) {
     console.log('에러 코드별 에러처리')
-    console.log(error)
+    console.error(error)
+    return Promise.reject()
   }
 )

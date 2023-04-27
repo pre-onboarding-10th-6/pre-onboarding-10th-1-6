@@ -1,15 +1,20 @@
-import { useState, useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
+
 import { getTodoAPI, createTodoAPI } from '../api/todo'
-import { Todo } from '../utils/types'
+import { useTodoDispatch } from '../context/todoContext'
+import { TodoActionTypes } from '../context/todoReducer'
 
 function useTodo() {
-  const [todos, setTodos] = useState<Todo[]>([])
+  const dispatch = useTodoDispatch()
   const todoRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     async function fetchTodo() {
-      const res = await getTodoAPI()
-      setTodos(res.data)
+      const { data } = await getTodoAPI()
+      dispatch({
+        type: TodoActionTypes.SET_TODOS,
+        payload: { todos: data }
+      })
     }
     fetchTodo()
   }, [])
@@ -20,12 +25,19 @@ function useTodo() {
     if (!todoRef.current || todoRef.current.value === '')
       throw new Error('값을 입력해주세요')
 
-    const res = await createTodoAPI({ todo: todoRef.current.value })
-    setTodos([...todos, res.data])
+    const { data: newTodo } = await createTodoAPI({
+      todo: todoRef.current.value
+    })
+
+    dispatch({
+      type: TodoActionTypes.ADD_TODO,
+      payload: newTodo
+    })
+
     todoRef.current.value = ''
   }
 
-  return { todos, setTodos, handleSubmit, todoRef }
+  return { handleSubmit, todoRef }
 }
 
 export default useTodo
