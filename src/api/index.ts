@@ -1,25 +1,44 @@
-import { authInstance } from '../utils/axios'
+import axios, { AxiosInstance, InternalAxiosRequestConfig } from 'axios'
 
-export const SignInTodo = (email: string, password: string): Promise<any> =>
-  authInstance.post(`/auth/signin`, {
-    email,
-    password
-  })
+const BASE_URL = 'https://www.pre-onboarding-selection-task.shop'
 
-export const SignUpTodo = (email: string, password: string): Promise<any> =>
-  authInstance.post(`/auth/signup`, {
-    email,
-    password
-  })
+const defaultOptions = {
+  baseURL: BASE_URL,
+  headers: {
+    'Content-Type': 'application/json'
+  }
+}
 
-// export const SignUpTodo = async (email: string, password: string) => {
-//   try {
-//     const res = await authInstance.post(`/auth/signup`, {
-//       email,
-//       password
-//     })
-//     return res.status
-//   } catch (error: any) {
-//     return error.response.status
-//   }
-// }
+export const instance: AxiosInstance = axios.create(defaultOptions)
+export const authInstance: AxiosInstance = axios.create(defaultOptions)
+export const todoInstance: AxiosInstance = axios.create(defaultOptions)
+
+export const getInterCeptor = () => {
+  authInstance.interceptors.request.use(
+    (config: InternalAxiosRequestConfig) => {
+      const token = localStorage.getItem('token')
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`
+      }
+      return config
+    }
+  )
+}
+
+todoInstance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
+  const token = localStorage.getItem('token')
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`
+  }
+  return config
+})
+
+todoInstance.interceptors.response.use(
+  function (response) {
+    return response
+  },
+  function (error) {
+    console.log('에러 코드별 에러처리')
+    console.log(error)
+  }
+)
