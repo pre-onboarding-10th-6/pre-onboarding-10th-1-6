@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import useInputs from '../../hooks/useInputs'
-import { SignInTodo } from '../../api'
+import { SignInTodo } from '../../api/auth'
 import Form from '../../components/Form'
 import Input from '../../components/Input'
 import validation from '../../utils/validation'

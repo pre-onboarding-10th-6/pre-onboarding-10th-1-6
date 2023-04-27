@@ -1,4 +1,8 @@
-import axios, { AxiosInstance, InternalAxiosRequestConfig } from 'axios'
+import axios, {
+  AxiosInstance,
+  AxiosRequestConfig,
+  InternalAxiosRequestConfig
+} from 'axios'
 
 const BASE_URL = 'https://www.pre-onboarding-selection-task.shop'
 
@@ -13,15 +17,24 @@ export const instance: AxiosInstance = axios.create(defaultOptions)
 
 export const authInstance: AxiosInstance = axios.create(defaultOptions)
 
+export const todoInstance: AxiosInstance = axios.create(defaultOptions)
+
 export const getInterCeptor = () => {
   authInstance.interceptors.request.use(
-    (config: InternalAxiosRequestConfig<any>) => {
+    (config: InternalAxiosRequestConfig) => {
       const token = localStorage.getItem('token')
       if (token) {
-        // eslint-disable-next-line no-param-reassign
         config.headers.Authorization = `Bearer ${token}`
       }
       return config
     }
   )
 }
+
+todoInstance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
+  const token = localStorage.getItem('token')
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`
+  }
+  return config
+})
