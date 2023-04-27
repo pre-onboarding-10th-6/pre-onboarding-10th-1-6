@@ -6,7 +6,7 @@ export interface TodoProp {
 }
 
 export interface SignInResponse {
-  [token: string]: string
+  [access_token: string]: string
 }
 
 export interface StatusInResponse {

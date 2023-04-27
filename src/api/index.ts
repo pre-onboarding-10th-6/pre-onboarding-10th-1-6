@@ -61,7 +61,7 @@ export const deleteTodo = async (
   try {
     const res = await instance.delete(`/todos/${id}`)
 
-    return res as AxiosResponse<StatusInResponse>
+    return res
   } catch (error) {
     throw new Error('Failed to delete todo')
   }

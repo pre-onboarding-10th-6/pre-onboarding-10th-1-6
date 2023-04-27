@@ -17,8 +17,8 @@ function SignIn() {
   const onClickLogin = useCallback(
     async (email: string, password: string) => {
       try {
-        const response = await SignInTodo(email, password)
-        const token = response.data.access_token
+        const res = await SignInTodo(email, password)
+        const token = res.data.access_token
         localStorage.setItem('token', token)
         return navigate('/todo')
       } catch (error: unknown) {
