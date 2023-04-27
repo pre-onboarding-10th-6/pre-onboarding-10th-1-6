@@ -7,8 +7,36 @@ interface Props {
 }
 
 const TodoList = ({ todo, onDelete }: Props) => {
-  const { handleCheckChange, MutateButtons, todoStatus, inputRef } =
+  const { handleCheckChange, handleButtonSubmit, todoStatus, inputRef } =
     useTodoList(todo, onDelete)
+
+  const renderEditMode = () => (
+    <>
+      <input
+        defaultValue={todoStatus.value}
+        data-testid="modify-input"
+        ref={inputRef}
+      />
+      <button data-testid="submit-button" onClick={handleButtonSubmit}>
+        제출
+      </button>
+      <button data-testid="cancel-button" onClick={handleButtonSubmit}>
+        취소
+      </button>
+    </>
+  )
+
+  const renderViewMode = () => (
+    <>
+      <span>{todoStatus.value}</span>
+      <button data-testid="modify-button" onClick={handleButtonSubmit}>
+        수정
+      </button>
+      <button data-testid="delete-button" onClick={handleButtonSubmit}>
+        삭제
+      </button>
+    </>
+  )
 
   return (
     <li>
@@ -18,17 +46,8 @@ const TodoList = ({ todo, onDelete }: Props) => {
           checked={todoStatus.isChecked}
           onChange={handleCheckChange}
         />
-        {todoStatus.isEditMode ? (
-          <input
-            defaultValue={todoStatus.value}
-            data-testid="modify-input"
-            ref={inputRef}
-          />
-        ) : (
-          <span>{todoStatus.value}</span>
-        )}
+        {todoStatus.isEditMode ? renderEditMode() : renderViewMode()}
       </label>
-      <MutateButtons />
     </li>
   )
 }
