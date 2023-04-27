@@ -23,3 +23,5 @@ export const SignUpTodo = (email: string, password: string): Promise<any> =>
 //     return error.response.status
 //   }
 // }
+
+export const GetTodo = () => authInstance.get(`/todos`)
