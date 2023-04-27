@@ -39,12 +39,7 @@ export default function Todo() {
       todo: args.todo,
       isCompleted: args.isCompleted
     })
-    const updateResult = todos.map(element =>
-      element.id === args.id
-        ? { ...element, isCompleted: args.isCompleted }
-        : element
-    )
-    setTodos(updateResult)
+    await getTodoDataUpdate()
   }
 
   const deleteTodoButtonHandler = async (id: number) => {
