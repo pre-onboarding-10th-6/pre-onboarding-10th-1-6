@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import useInputs from '../../hooks/useInputs'
-import { SignUpTodo } from '../../api'
+
+import { SignUpTodo } from '../../api/auth'
 import Form from '../../components/Form'
 import Input from '../../components/Input'
+import useInputs from '../../hooks/useInputs'
 import validation from '../../utils/validation'
 
 function SignUp() {
@@ -12,7 +13,7 @@ function SignUp() {
     handleChange
   } = useInputs({ email: '', password: '' })
 
-  const redirect = useNavigate()
+  const navigate = useNavigate()
 
   const onClickSignUp = useCallback(
     // async (_email: string, _password: string) => {
@@ -20,7 +21,7 @@ function SignUp() {
 
     //   if (status === 201) {
     //     alert('회원가입 완료')
-    //     return redirect('/signin')
+    //     return navigate('/signin')
     //   }
     //   return alert('회원가입 실패')
     (_email: string, _password: string) => {
@@ -28,12 +29,12 @@ function SignUp() {
         .then(res => {
           if (res.status === 201) {
             alert('회원가입 완료')
-            redirect('/signin')
+            navigate('/signin')
           }
         })
         .catch(err => alert(`[${err.response.status}] 회원가입 실패`))
     },
-    [redirect]
+    [navigate]
   )
 
   // const regEx = useCallback(() => {
@@ -48,9 +49,9 @@ function SignUp() {
   useEffect(() => {
     const token = localStorage.getItem('token')
     if (token) {
-      redirect('/todo')
+      navigate('/todo')
     }
-  }, [redirect])
+  }, [navigate])
 
   return (
     <main>

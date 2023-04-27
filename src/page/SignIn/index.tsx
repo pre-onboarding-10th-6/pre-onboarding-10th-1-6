@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import useInputs from '../../hooks/useInputs'
-import { SignInTodo } from '../../api'
+
+import { SignInTodo } from '../../api/auth'
 import Form from '../../components/Form'
 import Input from '../../components/Input'
+import useInputs from '../../hooks/useInputs'
 import validation from '../../utils/validation'
 
 function SignIn() {
@@ -12,7 +13,7 @@ function SignIn() {
     handleChange
   } = useInputs({ email: '', password: '' })
 
-  const redirect = useNavigate()
+  const navigate = useNavigate()
 
   const onClickLogin = useCallback(
     // async (_email: string, _password: string) => {
@@ -20,7 +21,7 @@ function SignIn() {
     //     const token = await SignInTodo(_email, _password)
     //     localStorage.setItem('token', token.data.access_token)
 
-    //     redirect('/todo')
+    //     navigate('/todo')
     //   } catch (err) {
     //     alert('로그인 실패')
     //   }
@@ -30,20 +31,20 @@ function SignIn() {
         .then(res => res.data.access_token)
         .then(token => {
           localStorage.setItem('token', token)
-          redirect('/todo')
+          navigate('/todo')
         })
         .catch(err => alert(`[${err.response.status}] 로그인 실패`))
     },
-    [redirect]
+    [navigate]
   )
 
   useEffect(() => {
     const token = localStorage.getItem('token')
 
     if (token) {
-      redirect('/todo')
+      navigate('/todo')
     }
-  }, [redirect])
+  }, [navigate])
 
   return (
     <main>
