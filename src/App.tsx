@@ -1,5 +1,6 @@
 import React, { lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { TodoContextProvider } from './store/todo'
 
 const Home = lazy(() => import('./page/Home'))
 const SignIn = lazy(() => import('./page/SignIn'))
@@ -15,7 +16,11 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/todo" element={<Todo />} />
+            <Route path="/todo" element={
+              <TodoContextProvider>
+                <Todo />
+              </TodoContextProvider>
+            } />
           </Routes>
         </Suspense>
       </BrowserRouter>
