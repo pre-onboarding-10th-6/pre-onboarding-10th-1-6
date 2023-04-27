@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react'
 
-const useInputs = (initialValue: Record<string, string>) => {
+const useFormInputs = (initialValue: Record<string, string>) => {
   const [values, setValues] = useState(initialValue)
 
   const handleChange = useCallback(
@@ -17,4 +17,4 @@ const useInputs = (initialValue: Record<string, string>) => {
   return { values, handleChange }
 }
 
-export default useInputs
+export default useFormInputs

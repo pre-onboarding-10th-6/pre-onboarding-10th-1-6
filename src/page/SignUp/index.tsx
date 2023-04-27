@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import useInputs from '../../hooks/useInputs'
+import useFormInputs from '../../hooks/useInputs'
 import { SignUpTodo } from '../../api'
 import Form from '../../components/Form'
 import Input from '../../components/Input'
@@ -10,19 +10,11 @@ function SignUp() {
   const {
     values: { email, password },
     handleChange
-  } = useInputs({ email: '', password: '' })
+  } = useFormInputs({ email: '', password: '' })
 
   const redirect = useNavigate()
 
   const onClickSignUp = useCallback(
-    // async (_email: string, _password: string) => {
-    //   const status = await SignUpTodo(_email, _password)
-
-    //   if (status === 201) {
-    //     alert('회원가입 완료')
-    //     return redirect('/signin')
-    //   }
-    //   return alert('회원가입 실패')
     (_email: string, _password: string) => {
       SignUpTodo(_email, _password)
         .then(res => {
@@ -35,15 +27,6 @@ function SignUp() {
     },
     [redirect]
   )
-
-  // const regEx = useCallback(() => {
-  //   const emailRegEx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-  //   const pwdRegEx = /^.{8,}$/
-  //   if (emailRegEx.test(email) && pwdRegEx.test(password)) {
-  //     return true
-  //   }
-  //   return false
-  // }, [email, password])
 
   useEffect(() => {
     const token = localStorage.getItem('token')

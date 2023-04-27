@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import useInputs from '../../hooks/useInputs'
+import useFormInputs from '../../hooks/useInputs'
 import { SignInTodo } from '../../api'
 import Form from '../../components/Form'
 import Input from '../../components/Input'
@@ -10,21 +10,11 @@ function SignIn() {
   const {
     values: { email, password },
     handleChange
-  } = useInputs({ email: '', password: '' })
+  } = useFormInputs({ email: '', password: '' })
 
   const redirect = useNavigate()
 
   const onClickLogin = useCallback(
-    // async (_email: string, _password: string) => {
-    //   try {
-    //     const token = await SignInTodo(_email, _password)
-    //     localStorage.setItem('token', token.data.access_token)
-
-    //     redirect('/todo')
-    //   } catch (err) {
-    //     alert('로그인 실패')
-    //   }
-    // },
     (_email: string, _password: string) => {
       SignInTodo(_email, _password)
         .then(res => res.data.access_token)

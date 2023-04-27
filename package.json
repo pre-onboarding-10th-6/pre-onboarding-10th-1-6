@@ -23,8 +23,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint --cache './src/**/*.{ts,tsx,js,jsx}'",
-    "format": "prettier --cache --write --config ./.prettierrc.json './src/**/*.{ts,tsx}'",
+    "lint": "eslint --cache \"./src/**/*.{ts,tsx,js,jsx}\"",
+    "format": "prettier --cache --write --config ./.prettierrc.json \"./src/**/*.{ts,tsx}\"",
     "postinstall": "husky install && git config --local commit.template .gitmessage.txt"
   },
   "eslintConfig": {
