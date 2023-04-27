@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { redirect } from 'react-router-dom'
 import { AddTodo, DeleteTodo, EditTodo, GetTodo } from '../../api'
 
 import { BsPlusCircleFill } from 'react-icons/bs'
@@ -9,6 +8,7 @@ import Input from '../../components/Input'
 import { getInterCeptor } from '../../utils/axios'
 import TodoItem from '../../components/TodoItem'
 import { TODO_ITEM } from '../../constant/Todo'
+import { useNavigate } from 'react-router-dom'
 
 function Todo() {
   const {
@@ -17,6 +17,7 @@ function Todo() {
     setValues
   } = useInputs({ todo: '' })
   const [todoList, setTodoList] = useState([])
+  const navigate = useNavigate()
   // const [todoValid, setTodoValid] = useState(true)
 
   //todo 불러오기
@@ -72,8 +73,12 @@ function Todo() {
   useEffect(() => {
     getInterCeptor()
     getTodo()
-    redirect('/signin')
-  }, [redirect])
+
+    const token = localStorage.getItem('token')
+    if (!token) {
+      navigate('/signin')
+    }
+  }, [navigate])
 
   return (
     <main>
