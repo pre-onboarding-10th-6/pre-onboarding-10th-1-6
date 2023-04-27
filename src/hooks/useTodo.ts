@@ -19,18 +19,14 @@ function useTodo() {
   }, [])
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    try {
-      event.preventDefault()
+    event.preventDefault()
 
-      if (!todoRef.current || todoRef.current.value === '')
-        throw new Error('값을 입력해주세요')
+    if (!todoRef.current || todoRef.current.value === '')
+      throw new Error('값을 입력해주세요')
 
-      const res = await createTodoAPI({ todo: todoRef.current.value })
-      setTodos([...todos, res.data])
-      todoRef.current.value = ''
-    } catch (error) {
-      alert(error)
-    }
+    const res = await createTodoAPI({ todo: todoRef.current.value })
+    setTodos([...todos, res.data])
+    todoRef.current.value = ''
   }
 
   return { todos, setTodos, handleSubmit, todoRef }

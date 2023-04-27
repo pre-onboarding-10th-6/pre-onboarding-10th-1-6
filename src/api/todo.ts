@@ -1,4 +1,4 @@
-import { todoInstance } from '../utils/axios'
+import { todoInstance } from '.'
 import { Todo, updateTodo } from '../utils/types'
 import { AxiosResponse } from 'axios'
 

@@ -1,8 +1,4 @@
-import axios, {
-  AxiosInstance,
-  AxiosRequestConfig,
-  InternalAxiosRequestConfig
-} from 'axios'
+import axios, { AxiosInstance, InternalAxiosRequestConfig } from 'axios'
 
 const BASE_URL = 'https://www.pre-onboarding-selection-task.shop'
 
@@ -14,9 +10,7 @@ const defaultOptions = {
 }
 
 export const instance: AxiosInstance = axios.create(defaultOptions)
-
 export const authInstance: AxiosInstance = axios.create(defaultOptions)
-
 export const todoInstance: AxiosInstance = axios.create(defaultOptions)
 
 export const getInterCeptor = () => {
@@ -38,3 +32,13 @@ todoInstance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   }
   return config
 })
+
+todoInstance.interceptors.response.use(
+  function (response) {
+    return response
+  },
+  function (error) {
+    console.log('에러 코드별 에러처리')
+    console.log(error)
+  }
+)
