@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
 import { getTodoAPI, createTodoAPI } from '../api/todo'
+import { Todo } from '../utils/types'
 
 function useTodo() {
-  const [todos, setTodos] = useState<any>([])
+  const [todos, setTodos] = useState<Todo[]>([])
   const todoRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
@@ -19,16 +20,16 @@ function useTodo() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     try {
-      if (!todoRef.current) throw new Error('인풋이 초기화되지 않았습니다')
       event.preventDefault()
-      const body = {
-        todo: todoRef.current.value
-      }
-      const res = await createTodoAPI(body)
+
+      if (!todoRef.current || todoRef.current.value === '')
+        throw new Error('값을 입력해주세요')
+
+      const res = await createTodoAPI({ todo: todoRef.current.value })
       setTodos([...todos, res.data])
       todoRef.current.value = ''
     } catch (error) {
-      console.error(error)
+      alert(error)
     }
   }
 

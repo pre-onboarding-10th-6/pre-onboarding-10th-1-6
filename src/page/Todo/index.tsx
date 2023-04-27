@@ -1,10 +1,11 @@
-import React from 'react'
 import useTodo from '../../hooks/useTodo'
 import TodoList from './TodoList'
 
 function Todo() {
-  const { todos, handleSubmit, todoRef, setTodos } = useTodo()
+  const { todos, setTodos, handleSubmit, todoRef } = useTodo()
 
+  // useTodo 컴포넌트로 나눈 이유 : 복잡도를 낮추기 위한 분리
+  // 재사용을 위해 분리하는 방법은??
   return (
     <main>
       <div>
@@ -15,13 +16,11 @@ function Todo() {
       </div>
 
       <div>
-        {todos.map((todo: any) => (
+        {todos.map(todo => (
           <TodoList
             todo={todo}
             key={todo.id}
-            onDelete={() => {
-              setTodos(todos.filter((list: any) => list.id !== todo.id))
-            }}
+            onDelete={() => setTodos(todos.filter(list => list.id !== todo.id))}
           />
         ))}
       </div>

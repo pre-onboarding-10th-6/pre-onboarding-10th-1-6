@@ -1,8 +1,9 @@
 import { useState, useRef } from 'react'
 import { updateTodoAPI, deleteTodoAPI } from '../api/todo'
+import { Todo, TodoStatus } from '../utils/types'
 
-const useTodoList = (onDelete: any, todo: any) => {
-  const [todoStatus, setTodoStatus] = useState<any>({
+const useTodoList = (todo: Todo, onDelete: () => void) => {
+  const [todoStatus, setTodoStatus] = useState<TodoStatus>({
     isEditMode: false,
     isChecked: todo.isCompleted,
     value: todo.todo
@@ -10,52 +11,59 @@ const useTodoList = (onDelete: any, todo: any) => {
   const inputRef = useRef<HTMLInputElement>(null)
 
   const handleSubmitUpdate = async () => {
-    const body = {
-      todo: inputRef.current !== null && inputRef.current.value,
-      isCompleted: todoStatus.isChecked
+    try {
+      const body = {
+        todo: inputRef.current !== null ? inputRef.current.value : '',
+        isCompleted: todoStatus.isChecked
+      }
+      await updateTodoAPI(todo.id, body)
+      setTodoStatus({
+        ...todoStatus,
+        isEditMode: false,
+        value: inputRef.current !== null ? inputRef.current.value : ''
+      })
+    } catch (error) {
+      console.error(error)
     }
-    await updateTodoAPI(todo.id, body)
-    setTodoStatus({
-      ...todoStatus,
-      isEditMode: false,
-      value: inputRef.current !== null && inputRef.current.value
-    })
   }
 
-  const handleCancel = () => {
-    setTodoStatus({
-      ...todoStatus,
-      isEditMode: false
-    })
-  }
-
-  const handleModify = () => {
-    setTodoStatus({
-      ...todoStatus,
-      isEditMode: true
-    })
+  const handleEditMode = (event: React.MouseEvent<HTMLButtonElement>) => {
+    if (event.target instanceof HTMLButtonElement) {
+      const testId = event.target.dataset.testid
+      if (!testId) throw new Error('data-testId 값이 변경되었는지 확인해주세요')
+      setTodoStatus({
+        ...todoStatus,
+        isEditMode: testId === 'cancel-button' ? false : true
+      })
+    }
   }
 
   const handleDelete = async () => {
-    await deleteTodoAPI(todo.id)
-    onDelete()
+    try {
+      await deleteTodoAPI(todo.id)
+      onDelete()
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   const handleCheckChange = async () => {
-    // isEditMode가 아닐 땐 ref가 없으므로, value 사용
-    const body = {
-      todo: todoStatus.value,
-      isCompleted: !todoStatus.isChecked
+    try {
+      const body = {
+        todo: todoStatus.value,
+        isCompleted: !todoStatus.isChecked
+      }
+      await updateTodoAPI(todo.id, body)
+      setTodoStatus({
+        ...todoStatus,
+        isChecked: !todoStatus.isChecked
+      })
+    } catch (error) {
+      console.log(error)
     }
-    await updateTodoAPI(todo.id, body)
-    setTodoStatus({
-      ...todoStatus,
-      isChecked: !todoStatus.isChecked
-    })
   }
 
   const MutateButtons = () => {
-    console.log(todoStatus)
     return (
       <>
         {todoStatus.isEditMode ? (
@@ -63,13 +71,13 @@ const useTodoList = (onDelete: any, todo: any) => {
             <button data-testid="submit-button" onClick={handleSubmitUpdate}>
               제출
             </button>
-            <button data-testid="cancel-button" onClick={handleCancel}>
+            <button data-testid="cancel-button" onClick={handleEditMode}>
               취소
             </button>
           </>
         ) : (
           <>
-            <button data-testid="modify-button" onClick={handleModify}>
+            <button data-testid="modify-button" onClick={handleEditMode}>
               수정
             </button>
             <button data-testid="delete-button" onClick={handleDelete}>

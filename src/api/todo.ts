@@ -1,10 +1,17 @@
 import { todoInstance } from '../utils/axios'
+import { Todo, updateTodo } from '../utils/types'
+import { AxiosResponse } from 'axios'
 
-export const createTodoAPI = (body: any) => todoInstance.post('/todos', body)
+export const createTodoAPI = (body: {
+  todo: string
+}): Promise<AxiosResponse<Todo>> => todoInstance.post('/todos', body)
 
-export const getTodoAPI = () => todoInstance.get('/todos')
+export const getTodoAPI = (): Promise<AxiosResponse<Todo[]>> =>
+  todoInstance.get('/todos')
 
-export const updateTodoAPI = (id: any, body: any) =>
-  todoInstance.put(`/todos/${id}`, body)
+export const updateTodoAPI = (
+  id: number,
+  body: updateTodo
+): Promise<AxiosResponse<Todo>> => todoInstance.put(`/todos/${id}`, body)
 
-export const deleteTodoAPI = (id: any) => todoInstance.delete(`/todos/${id}`)
+export const deleteTodoAPI = (id: number) => todoInstance.delete(`/todos/${id}`)

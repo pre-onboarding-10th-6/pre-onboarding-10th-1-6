@@ -1,8 +1,14 @@
 import useTodoList from '../../hooks/useTodoList'
+import { Todo } from '../../utils/types'
 
-const TodoList = ({ todo, onDelete }: any) => {
+interface Props {
+  todo: Todo
+  onDelete: () => void
+}
+
+const TodoList = ({ todo, onDelete }: Props) => {
   const { handleCheckChange, MutateButtons, todoStatus, inputRef } =
-    useTodoList(onDelete, todo)
+    useTodoList(todo, onDelete)
 
   return (
     <li>
