@@ -6,6 +6,6 @@ export interface TODO_ITEM {
 
 export interface TODO_ITEM_PROPS {
   todos: TODO_ITEM
-  updateTodo: (id: number, todo: string, isCompleted: boolean) => void
-  deleteTodo: (id: number) => void
+  checked: boolean
+  editTodo: (id: number, todo: string, isCompleted: boolean) => void
 }

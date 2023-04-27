@@ -30,3 +30,13 @@ export const AddTodo = (todo: string): Promise<any> =>
   authInstance.post(`/todos`, {
     todo
   })
+
+export const EditTodo = (
+  id: number,
+  todo: string,
+  isCompleted: boolean
+): Promise<any> =>
+  authInstance.put(`/todos/${id}`, {
+    todo,
+    isCompleted
+  })

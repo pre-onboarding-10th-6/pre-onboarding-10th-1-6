@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import { redirect } from 'react-router-dom'
-import { AddTodo, GetTodo } from '../../api'
+import { AddTodo, EditTodo, GetTodo } from '../../api'
 
 import { BsPlusCircleFill } from 'react-icons/bs'
 import useInputs from '../../hooks/useInputs'
 import Form from '../../components/Form'
 import Input from '../../components/Input'
 import { getInterCeptor } from '../../utils/axios'
+import TodoItem from '../../components/TodoItem'
 import { TODO_ITEM } from '../../constant/Todo'
 
 function Todo() {
@@ -42,6 +43,19 @@ function Todo() {
       })
   }
 
+  //todo 수정
+  const editTodo = (id: number, todo: string, isCompleted: boolean) => {
+    EditTodo(id, todo, isCompleted)
+      .then(res => {
+        if (res.status === 200) {
+          getTodo()
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
   useEffect(() => {
     getInterCeptor()
     getTodo()
@@ -66,10 +80,13 @@ function Todo() {
           </button>
         </Form>
         <ul>
-          {todoList.map((item: TODO_ITEM) => (
-            <div key={item.id}>
-              <div>{item.todo}</div>
-            </div>
+          {todoList.map((todoItem: TODO_ITEM) => (
+            <TodoItem
+              todos={todoItem}
+              key={todoItem.id}
+              checked={todoItem.isCompleted}
+              editTodo={editTodo}
+            />
           ))}
         </ul>
       </div>
