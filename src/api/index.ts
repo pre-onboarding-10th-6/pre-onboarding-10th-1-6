@@ -40,3 +40,6 @@ export const EditTodo = (
     todo,
     isCompleted
   })
+
+export const DeleteTodo = (id: number): Promise<any> =>
+  authInstance.delete(`/todos/${id}`)

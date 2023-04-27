@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { redirect } from 'react-router-dom'
-import { AddTodo, EditTodo, GetTodo } from '../../api'
+import { AddTodo, DeleteTodo, EditTodo, GetTodo } from '../../api'
 
 import { BsPlusCircleFill } from 'react-icons/bs'
 import useInputs from '../../hooks/useInputs'
@@ -56,6 +56,19 @@ function Todo() {
       })
   }
 
+  //todo 삭제
+  const deleteTodo = (id: number) => {
+    DeleteTodo(id)
+      .then(res => {
+        if (res.status === 204) {
+          getTodo()
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
   useEffect(() => {
     getInterCeptor()
     getTodo()
@@ -86,6 +99,7 @@ function Todo() {
               key={todoItem.id}
               checked={todoItem.isCompleted}
               editTodo={editTodo}
+              deleteTodo={() => deleteTodo(todoItem.id)}
             />
           ))}
         </ul>

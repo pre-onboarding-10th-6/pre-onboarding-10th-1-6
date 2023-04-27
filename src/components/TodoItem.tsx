@@ -3,7 +3,7 @@ import { GoTrashcan, GoPencil, GoX } from 'react-icons/go'
 import { TODO_ITEM_PROPS } from '../constant/Todo'
 import Input from './Input'
 
-function TodoItem({ todos, editTodo }: TODO_ITEM_PROPS) {
+function TodoItem({ todos, editTodo, deleteTodo }: TODO_ITEM_PROPS) {
   const { id, todo, isCompleted } = todos
   const [modifyMode, setModifyMode] = useState(false)
   const [updateVal, setUpdateVal] = useState('')
@@ -74,7 +74,11 @@ function TodoItem({ todos, editTodo }: TODO_ITEM_PROPS) {
           >
             <GoPencil />
           </button>
-          <button data-testid="delete-button" className="delete-btn">
+          <button
+            data-testid="delete-button"
+            className="delete-btn"
+            onClick={() => deleteTodo(id)}
+          >
             <GoTrashcan />
           </button>
         </li>
