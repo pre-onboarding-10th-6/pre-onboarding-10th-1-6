@@ -5,45 +5,40 @@ import { SignInTodo } from '../../api'
 import Form from '../../components/Form'
 import Input from '../../components/Input'
 import validation from '../../utils/validation'
+import { AxiosError } from 'axios'
 
 function SignIn() {
   const {
     values: { email, password },
     handleChange
   } = useInputs({ email: '', password: '' })
-
-  const redirect = useNavigate()
+  const navigate = useNavigate()
 
   const onClickLogin = useCallback(
-    // async (_email: string, _password: string) => {
-    //   try {
-    //     const token = await SignInTodo(_email, _password)
-    //     localStorage.setItem('token', token.data.access_token)
-
-    //     redirect('/todo')
-    //   } catch (err) {
-    //     alert('로그인 실패')
-    //   }
-    // },
-    (_email: string, _password: string) => {
-      SignInTodo(_email, _password)
-        .then(res => res.data.access_token)
-        .then(token => {
-          localStorage.setItem('token', token)
-          redirect('/todo')
-        })
-        .catch(err => alert(`[${err.response.status}] 로그인 실패`))
+    async (email: string, password: string) => {
+      try {
+        const response = await SignInTodo(email, password)
+        const token = response.data.access_token
+        localStorage.setItem('token', token)
+        return navigate('/todo')
+      } catch (error: unknown) {
+        if (error instanceof AxiosError) {
+          alert(`[${error.response?.status}] ${error.message || '로그인 실패'}`)
+        } else {
+          throw new Error(error as string)
+        }
+      }
     },
-    [redirect]
+    [navigate]
   )
 
   useEffect(() => {
     const token = localStorage.getItem('token')
 
     if (token) {
-      redirect('/todo')
+      navigate('/todo')
     }
-  }, [redirect])
+  }, [navigate])
 
   return (
     <main>

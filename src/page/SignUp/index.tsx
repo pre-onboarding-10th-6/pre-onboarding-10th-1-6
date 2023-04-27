@@ -12,45 +12,28 @@ function SignUp() {
     handleChange
   } = useInputs({ email: '', password: '' })
 
-  const redirect = useNavigate()
+  const token = localStorage.getItem('token')
+  const navigate = useNavigate()
 
   const onClickSignUp = useCallback(
-    // async (_email: string, _password: string) => {
-    //   const status = await SignUpTodo(_email, _password)
-
-    //   if (status === 201) {
-    //     alert('회원가입 완료')
-    //     return redirect('/signin')
-    //   }
-    //   return alert('회원가입 실패')
-    (_email: string, _password: string) => {
-      SignUpTodo(_email, _password)
+    (email: string, password: string) => {
+      SignUpTodo(email, password)
         .then(res => {
           if (res.status === 201) {
             alert('회원가입 완료')
-            redirect('/signin')
+            navigate('/signin')
           }
         })
         .catch(err => alert(`[${err.response.status}] 회원가입 실패`))
     },
-    [redirect]
+    [navigate]
   )
 
-  // const regEx = useCallback(() => {
-  //   const emailRegEx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-  //   const pwdRegEx = /^.{8,}$/
-  //   if (emailRegEx.test(email) && pwdRegEx.test(password)) {
-  //     return true
-  //   }
-  //   return false
-  // }, [email, password])
-
   useEffect(() => {
-    const token = localStorage.getItem('token')
     if (token) {
-      redirect('/todo')
+      navigate('/todo')
     }
-  }, [redirect])
+  }, [])
 
   return (
     <main>
