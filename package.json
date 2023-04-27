@@ -23,9 +23,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "postinstall": "husky install && git config --local commit.template .gitmessage.txt",
-    "format": "prettier --cache --write .",
-    "lint": "eslint --cache ."
+    "lint": "eslint --cache ./src/**/*.{ts,tsx,js,jsx}",
+    "format": "prettier --cache --write --config ./.prettierrc.json ./src/**/*.{ts,tsx}",
+    "postinstall": "husky install && git config --local commit.template .gitmessage.txt"
   },
   "eslintConfig": {
     "extends": [
