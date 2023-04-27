@@ -1,9 +1,11 @@
+import { AxiosError } from 'axios'
 import React, { useCallback, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import useInputs from '../../hooks/useInputs'
-import { SignInTodo } from '../../api/auth'
+
+import { signInTodo } from '../../api/auth'
 import Form from '../../components/Form'
 import Input from '../../components/Input'
+import useInputs from '../../hooks/useInputs'
 import validation from '../../utils/validation'
 
 function SignIn() {
@@ -12,49 +14,37 @@ function SignIn() {
     handleChange
   } = useInputs({ email: '', password: '' })
 
-  const redirect = useNavigate()
+  const navigate = useNavigate()
 
   const onClickLogin = useCallback(
-    // async (_email: string, _password: string) => {
-    //   try {
-    //     const token = await SignInTodo(_email, _password)
-    //     localStorage.setItem('token', token.data.access_token)
-
-    //     redirect('/todo')
-    //   } catch (err) {
-    //     alert('로그인 실패')
-    //   }
-    // },
-    (_email: string, _password: string) => {
-      SignInTodo(_email, _password)
-        .then(res => res.data.access_token)
-        .then(token => {
-          localStorage.setItem('token', token)
-          redirect('/todo')
-        })
-        .catch(err => alert(`[${err.response.status}] 로그인 실패`))
+    async (email: string, password: string) => {
+      try {
+        const res = await signInTodo(email, password)
+        const token = res.data.access_token
+        localStorage.setItem('token', token)
+        return navigate('/todo')
+      } catch (error: unknown) {
+        if (error instanceof AxiosError) {
+          alert(`[${error.response?.status}] ${error.message || '로그인 실패'}`)
+        } else {
+          throw new Error(error as string)
+        }
+      }
     },
-    [redirect]
+    [navigate]
   )
-
   useEffect(() => {
     const token = localStorage.getItem('token')
 
     if (token) {
-      redirect('/todo')
+      navigate('/todo')
     }
-  }, [redirect])
+  }, [navigate])
 
   return (
     <main>
       <Form name="로그인">
         <div>
-          <label
-            htmlFor="email"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >
-            Your email
-          </label>
           <Input
             id="email"
             testid="email-input"
@@ -63,15 +53,10 @@ function SignIn() {
             placeholder="email 입력시 @ 포함시켜주세요"
             value={email}
             onChange={handleChange}
+            labelText="Your email"
           />
         </div>
         <div>
-          <label
-            htmlFor="password"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >
-            Password
-          </label>
           <Input
             id="password"
             testid="password-input"
@@ -80,6 +65,7 @@ function SignIn() {
             placeholder="비밀번호를 8자리이상 입력"
             value={password}
             onChange={handleChange}
+            labelText="Password"
           />
         </div>
         <button

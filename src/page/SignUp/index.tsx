@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import useInputs from '../../hooks/useInputs'
-import { SignUpTodo } from '../../api/auth'
+
+import { signUpTodo } from '../../api/auth'
 import Form from '../../components/Form'
 import Input from '../../components/Input'
+import useInputs from '../../hooks/useInputs'
 import validation from '../../utils/validation'
 
 function SignUp() {
@@ -15,16 +16,8 @@ function SignUp() {
   const redirect = useNavigate()
 
   const onClickSignUp = useCallback(
-    // async (_email: string, _password: string) => {
-    //   const status = await SignUpTodo(_email, _password)
-
-    //   if (status === 201) {
-    //     alert('회원가입 완료')
-    //     return redirect('/signin')
-    //   }
-    //   return alert('회원가입 실패')
     (_email: string, _password: string) => {
-      SignUpTodo(_email, _password)
+      signUpTodo(_email, _password)
         .then(res => {
           if (res.status === 201) {
             alert('회원가입 완료')
@@ -35,15 +28,6 @@ function SignUp() {
     },
     [redirect]
   )
-
-  // const regEx = useCallback(() => {
-  //   const emailRegEx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-  //   const pwdRegEx = /^.{8,}$/
-  //   if (emailRegEx.test(email) && pwdRegEx.test(password)) {
-  //     return true
-  //   }
-  //   return false
-  // }, [email, password])
 
   useEffect(() => {
     const token = localStorage.getItem('token')
@@ -69,7 +53,7 @@ function SignUp() {
           testid="password-input"
           type="password"
           name="password"
-          placeholder="비밀번호를 8자리이상 입력"
+          placeholder="비밀번호를 8자리이상 입력해주세요"
           value={password}
           onChange={handleChange}
         />

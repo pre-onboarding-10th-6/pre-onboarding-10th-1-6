@@ -1,6 +1,8 @@
-import { todoInstance } from '.'
-import { Todo, updateTodo } from '../utils/types'
 import { AxiosResponse } from 'axios'
+
+import { Todo, UpdateTodo } from '../types'
+
+import { todoInstance } from '.'
 
 export const createTodoAPI = (body: {
   todo: string
@@ -11,7 +13,7 @@ export const getTodoAPI = (): Promise<AxiosResponse<Todo[]>> =>
 
 export const updateTodoAPI = (
   id: number,
-  body: updateTodo
+  body: UpdateTodo
 ): Promise<AxiosResponse<Todo>> => todoInstance.put(`/todos/${id}`, body)
 
 export const deleteTodoAPI = (id: number) => todoInstance.delete(`/todos/${id}`)
