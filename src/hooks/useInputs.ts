@@ -14,7 +14,7 @@ const useInputs = (initialValue: Record<string, string>) => {
     [values]
   )
 
-  return { values, handleChange }
+  return { values, handleChange, setValues }
 }
 
 export default useInputs

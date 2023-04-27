@@ -27,11 +27,12 @@ function SignUp() {
       SignUpTodo(_email, _password)
         .then(res => {
           if (res.status === 201) {
-            alert('회원가입 완료')
+            alert('회원가입이 완료되었습니다!')
             redirect('/signin')
           }
         })
-        .catch(err => alert(`[${err.response.status}] 회원가입 실패`))
+        // .catch(err => alert(`[${err.response.status}] 회원가입 실패`))
+        .catch(err => alert(err.response.data.message))
     },
     [redirect]
   )

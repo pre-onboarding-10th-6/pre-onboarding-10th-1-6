@@ -25,3 +25,8 @@ export const SignUpTodo = (email: string, password: string): Promise<any> =>
 // }
 
 export const GetTodo = () => authInstance.get(`/todos`)
+
+export const AddTodo = (todo: string): Promise<any> =>
+  authInstance.post(`/todos`, {
+    todo
+  })
