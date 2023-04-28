@@ -17,7 +17,7 @@
 
 |                              신종우                              |                              양주영                              |                              이원형                              |                              정다솔                              |                                 정예지                                 |
 | :--------------------------------------------------------------: | :--------------------------------------------------------------: | :--------------------------------------------------------------: | :--------------------------------------------------------------: | :--------------------------------------------------------------------: |
-|                                                                  |                             깃헙주소                             |                             깃헙주소                             |                             깃헙주소                             | **github**: [sabit1997](https://github.com/sabit1997?tab=repositories) |
+|                                                                  |                             깃헙주소                             |                             깃헙주소                             |  **github**: [ssori0421](https://github.com/ssori0421)  | **github**: [sabit1997](https://github.com/sabit1997?tab=repositories) |
 | ![팀원](https://img.shields.io/badge/-%ED%8C%80%EC%9B%90-yellow) | ![팀원](https://img.shields.io/badge/-%ED%8C%80%EC%9B%90-yellow) | ![팀원](https://img.shields.io/badge/-%ED%8C%80%EC%9B%90-yellow) | ![팀원](https://img.shields.io/badge/-%ED%8C%80%EC%9B%90-yellow) |    ![팀원](https://img.shields.io/badge/-%ED%8C%80%EC%9B%90-yellow)    |
 
 </center>
