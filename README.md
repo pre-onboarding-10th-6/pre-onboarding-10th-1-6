@@ -3,7 +3,7 @@
 # 1. 프로젝트
 
 Todo List 프로젝트입니다. <br>
-링크:
+배포링크: https://pre-onboarding-10th-1-6.vercel.app/
 
 ## 팀원목록
 
