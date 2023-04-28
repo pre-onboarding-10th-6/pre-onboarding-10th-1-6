@@ -29,13 +29,6 @@ function SignUp() {
     [redirect]
   )
 
-  useEffect(() => {
-    const token = localStorage.getItem('token')
-    if (token) {
-      redirect('/todo')
-    }
-  }, [redirect])
-
   return (
     <main>
       <Form name="회원가입">

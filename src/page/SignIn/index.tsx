@@ -33,13 +33,6 @@ function SignIn() {
     },
     [navigate]
   )
-  useEffect(() => {
-    const token = localStorage.getItem('token')
-
-    if (token) {
-      navigate('/todo')
-    }
-  }, [navigate])
 
   return (
     <main>
