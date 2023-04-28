@@ -26,7 +26,6 @@ todoInstance.interceptors.response.use(
     return response
   },
   function (error) {
-    console.log('에러 코드별 에러처리')
     console.error(error)
     return Promise.reject()
   }
