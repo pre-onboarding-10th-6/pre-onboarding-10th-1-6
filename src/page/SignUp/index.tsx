@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { signUpTodo } from '../../api/auth'
@@ -28,13 +28,6 @@ function SignUp() {
     },
     [redirect]
   )
-
-  useEffect(() => {
-    const token = localStorage.getItem('token')
-    if (token) {
-      redirect('/todo')
-    }
-  }, [redirect])
 
   return (
     <main>

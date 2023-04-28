@@ -1,5 +1,8 @@
 import React, { lazy, Suspense } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+
+import AuthRoute from './AuthRoute'
+import ProtectedRoute from './ProtectedRoute'
 
 const Home = lazy(() => import('./page/Home'))
 const SignIn = lazy(() => import('./page/SignIn'))
@@ -13,9 +16,29 @@ function App() {
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/signin" element={<SignIn />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/todo" element={<Todo />} />
+            <Route
+              path="/*"
+              element={
+                <AuthRoute>
+                  <Routes>
+                    <Route path="/signin" element={<SignIn />} />
+                    <Route path="/signup" element={<SignUp />} />
+                    <Route path="*" element={<Navigate to="/" />} />
+                  </Routes>
+                </AuthRoute>
+              }
+            />
+
+            <Route
+              path="/todo/*"
+              element={
+                <ProtectedRoute>
+                  <Routes>
+                    <Route index element={<Todo />} />
+                  </Routes>
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </Suspense>
       </BrowserRouter>
