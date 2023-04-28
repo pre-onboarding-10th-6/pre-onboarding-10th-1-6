@@ -1,13 +1,15 @@
 import React, { lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 
+import AuthRoute from './AuthRoute'
+import ProtectedRoute from './ProtectedRoute'
+
 const Home = lazy(() => import('./page/Home'))
 const SignIn = lazy(() => import('./page/SignIn'))
 const SignUp = lazy(() => import('./page/SignUp'))
 const Todo = lazy(() => import('./page/Todo'))
 
 function App() {
-  const isAuthenticated = localStorage.getItem('token')
   return (
     <div className="bg-gray-50 dark:bg-gray-900">
       <BrowserRouter>
@@ -15,16 +17,27 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route
-              path="/signin"
-              element={isAuthenticated ? <Navigate to="/todo" /> : <SignIn />}
+              path="/*"
+              element={
+                <AuthRoute>
+                  <Routes>
+                    <Route path="/signin" element={<SignIn />} />
+                    <Route path="/signup" element={<SignUp />} />
+                    <Route path="*" element={<Navigate to="/" />} />
+                  </Routes>
+                </AuthRoute>
+              }
             />
-            <Route
-              path="/signup"
-              element={isAuthenticated ? <Navigate to="/todo" /> : <SignUp />}
-            />
+
             <Route
               path="/todo/*"
-              element={isAuthenticated ? <Todo /> : <Navigate to="/signin" />}
+              element={
+                <ProtectedRoute>
+                  <Routes>
+                    <Route index element={<Todo />} />
+                  </Routes>
+                </ProtectedRoute>
+              }
             />
           </Routes>
         </Suspense>

@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios'
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 
 import { signInTodo } from '../../api/auth'
