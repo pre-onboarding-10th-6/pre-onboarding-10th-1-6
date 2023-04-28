@@ -10,15 +10,15 @@ Todo List 프로젝트입니다. <br>
 - 팀장 : 이정진
 - 팀원 : 곽현지, 김성주, 박재욱, 신종우, 양주영, 이원형, 정다솔, 정예지
 
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;팀6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;이정진&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;곽현지&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |                              김성주                              |                              박재욱                              |
-| :-------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------: | :--------------------------------------------------------------: | ---------------------------------------------------------------- |
-|                                                    **역할**                                                     |              ![Leader](https://img.shields.io/badge/-%ED%8C%80%EC%9E%A5-blue)              |                          ![팀원](https://img.shields.io/badge/-%ED%8C%80%EC%9B%90-yellow)                          | ![팀원](https://img.shields.io/badge/-%ED%8C%80%EC%9B%90-yellow) | ![팀원](https://img.shields.io/badge/-%ED%8C%80%EC%9B%90-yellow) | ![팀원](https://img.shields.io/badge/-%ED%8C%80%EC%9B%90-yellow) |
-|                                                   **Github**                                                    |                           [wjdrk70](https://github.com/wjdrk70)                            |                                      [hjKwak](https://github.com/KwakHyeonJi)                                      |         [dev-seongjoo](https://github.com/dev-seongjoo)          |            [LeChuckbb](https://github.com/LeChuckbb)             | [jw3215](https://github.com/jw3215)                              |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;팀6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;이정진&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;곽현지&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | 김성주 | 박재욱 |
+| :---: | :---: | :---: | :---: | :---: |
+| 역할 | ![Leader](https://img.shields.io/badge/-%ED%8C%80%EC%9E%A5-blue) | ![팀원](https://img.shields.io/badge/-%ED%8C%80%EC%9B%90-yellow) | ![팀원](https://img.shields.io/badge/-%ED%8C%80%EC%9B%90-yellow) | ![팀원](https://img.shields.io/badge/-%ED%8C%80%EC%9B%90-yellow) | ![팀원](https://img.shields.io/badge/-%ED%8C%80%EC%9B%90-yellow) |
+| Github | [wjdrk70](https://github.com/wjdrk70) | [hjKwak](https://github.com/KwakHyeonJi) | [dev-seongjoo](https://github.com/dev-seongjoo) | [LeChuckbb](https://github.com/LeChuckbb) | [jw3215](https://github.com/jw3215) 
 
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;신종우&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;양주영&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |                              이원형                              | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;정다솔&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;정예지&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
-| :----------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------: | :--------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------: |
-|              ![팀원](https://img.shields.io/badge/-%ED%8C%80%EC%9B%90-yellow)              |              ![팀원](https://img.shields.io/badge/-%ED%8C%80%EC%9B%90-yellow)              | ![팀원](https://img.shields.io/badge/-%ED%8C%80%EC%9B%90-yellow) |                    ![팀원](https://img.shields.io/badge/-%ED%8C%80%EC%9B%90-yellow)                    |  ![팀원](https://img.shields.io/badge/-%ED%8C%80%EC%9B%90-yellow)  |
-|                            [jw3215](https://github.com/jw3215)                             |                           [yangddu](https://github.com/yangddu)                            |         [WonhyeongLee](https://github.com/WonhyeongLee)          |                               [ssori0421](https://github.com/ssori0421)                                |             [sabit1997](https://github.com/sabit1997)              |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;신종우&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;양주영&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | 이원형 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;정다솔&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;정예지&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+| :---: | :---: | :---: | :---: | :---: |
+| ![팀원](https://img.shields.io/badge/-%ED%8C%80%EC%9B%90-yellow) | ![팀원](https://img.shields.io/badge/-%ED%8C%80%EC%9B%90-yellow) | ![팀원](https://img.shields.io/badge/-%ED%8C%80%EC%9B%90-yellow) | ![팀원](https://img.shields.io/badge/-%ED%8C%80%EC%9B%90-yellow) | ![팀원](https://img.shields.io/badge/-%ED%8C%80%EC%9B%90-yellow)
+ | [jw3215](https://github.com/jw3215) | [yangddu](https://github.com/yangddu) | [WonhyeongLee](https://github.com/WonhyeongLee) | [ssori0421](https://github.com/ssori0421) | [sabit1997](https://github.com/sabit1997) |
 
 <br />
 
@@ -76,9 +76,16 @@ Todo List 프로젝트입니다. <br>
 #### 설명
 
 - 메인페이지는 토큰 여부 상관없이 접근 가능
+
 - 비정상적인 경로 접근은 메인페이지로 이동
-- `/signin`, `/signup` + `<AuthRoute>` 내부 접근에서 토큰이 있으면 `/todo` 로 이동
-- `/todo`, `<ProtectedRoute>` 내부 접근은 토큰이 없으면 `/signin` 으로 이동
+
+- 인증(로그인)되지 않은 사용자가 `/todo` 에 접근하면 `/signin` 경로로 redirect 시킨다.
+
+- 인증된 사용자가 `/signin` 또는 `/signup` 에 접근하면 `/todo` 경로로 redirect 시킨다.
+
+- redirect 경로는 페이지 컴포넌트 상위에 정의된 `<AuthRoute>`, `<ProtectedRoute>` 컴포넌트에서 localStroage의 access_token 유무에 의해 결정된다.
+
+위와 같은 방식을 활용하면 불필요한 페이지 렌더링 및 리다이렉션을 방지할 수 있다.
 
 ```tsx
 <Routes>
@@ -132,47 +139,6 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
 
   return <>{children}</>
 }
-```
-
-### Assignment 2 - access_token 유무에 따른 redirect
-
-- 인증(로그인)되지 않은 사용자가 `/todo` 에 접근하면 `/signin` 경로로 redirect 시킨다.
-
-- 인증된 사용자가 `/signin` 또는 `/signup` 에 접근하면 `/todo` 경로로 redirect 시킨다.
-
-- redirect 경로는 페이지 컴포넌트 상위에 정의된 `<AuthRoute>`, `<ProtectedRoute>` 컴포넌트에서 localStroage의 access_token 유무에 의해 결정된다.
-
-위와 같은 방식을 활용하면 불필요한 페이지 렌더링 및 리다이렉션을 방지할 수 있다.
-
-```tsx
-return (
-  <Routes>
-    <Route path="/" element={<Home />} />
-    <Route
-      path="/*"
-      element={
-        <AuthRoute>
-          <Routes>
-            <Route path="/signin" element={<SignIn />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="*" element={<Navigate to="/" />} />
-          </Routes>
-        </AuthRoute>
-      }
-    />
-
-    <Route
-      path="/todo/*"
-      element={
-        <ProtectedRoute>
-          <Routes>
-            <Route index element={<Todo />} />
-          </Routes>
-        </ProtectedRoute>
-      }
-    />
-  </Routes>
-)
 ```
 
 ## TODO LIST
@@ -292,8 +258,6 @@ npm start
 ```
 
 # 6. 기술 스택
-
--> 글자 색상 잘 보이게 바꿔서! 줄바꾸는게 나을지도 고민
 
 <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black">
 <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=black">
